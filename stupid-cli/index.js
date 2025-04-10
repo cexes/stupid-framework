@@ -89,11 +89,11 @@ program
     }
 
     const routesToAdd = `
-router.get('/${tableName}', ${ControllerName}.index);
-router.get('/${tableName}/:id', ${ControllerName}.show);
-router.post('/${tableName}', ${ControllerName}.store);
-router.put('/${tableName}/:id', ${ControllerName}.update);
-router.delete('/${tableName}/:id', ${ControllerName}.destroy);`;
+      router.get('/${tableName}', ${ControllerName}.index);
+      router.get('/${tableName}/:id', ${ControllerName}.show);
+      router.post('/${tableName}', ${ControllerName}.store);
+      router.put('/${tableName}/:id', ${ControllerName}.update);
+      router.delete('/${tableName}/:id', ${ControllerName}.destroy);`;
 
     if (!routesContent.includes(`router.get('/${tableName}'`)) {
       routesContent += routesToAdd;

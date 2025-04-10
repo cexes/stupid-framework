@@ -1,24 +1,24 @@
 const db = require('../../config/database');
 
 class {{ModelName}} {
-  static all() {
-    return db('{{tableName}}');
+  static  async all() {
+    return await db('{{tableName}}');
   }
 
-  static find(id) {
-    return db('{{tableName}}').where({ id }).first();
+  static async find(id) {
+    return await db('{{tableName}}').where({ id }).first();
   }
 
-  static create(data) {
-    return db('{{tableName}}').insert(data);
+  static async create(data) {
+    return await  db('{{tableName}}').insert(data);
   }
 
-  static update(id, data) {
-    return db('{{tableName}}').where({ id }).update(data);
+  static async update(id, data) {
+    return await db('{{tableName}}').where({ id }).update(data);
   }
 
-  static delete(id) {
-    return db('{{tableName}}').where({ id }).delete();
+  static async delete(id) {
+    return await db('{{tableName}}').where({ id }).delete();
   }
 }
 

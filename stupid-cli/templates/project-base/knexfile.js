@@ -7,10 +7,17 @@ const path = require('path');
 module.exports = {
 
   development: {
-    client: 'pg',
+    client: 'postgresql',
     connection: {
-      filename: './dev.sqlite3'
+      database: '',
+      user:     '',
+      password: ''
     },
+    pool: {
+      min: 2,
+      max: 10
+    },
+
     migrations: {
       directory: path.resolve(__dirname, 'app/database/migrations'),
       tableName: 'knex_migrations'
