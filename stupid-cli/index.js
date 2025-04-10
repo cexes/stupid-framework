@@ -5,7 +5,7 @@ const { execSync } = require('child_process');
 const path = require('path');
 
 const projectName = process.argv[2];
-const projectRoot = process.cwd(); 
+const projectRoot = process.cwd();
 
 
 function renderTemplate(templatePath, replacements) {
@@ -66,7 +66,7 @@ program
     const tableName = name.toLowerCase() + 's';
     const replacements = { ControllerName, ModelName, tableName };
 
-    // Criação do controller
+
     const controllerTemplatePath = path.join(__dirname, 'templates/controller.js');
     const controllerContent = renderTemplate(controllerTemplatePath, replacements);
     const controllerPath = path.join(projectRoot, 'app/controllers', `${ControllerName}.js`);
@@ -123,7 +123,18 @@ program
     }
   });
 
-
+program
+  .command('migrate:rollback')
+  .description('Generates a rollback migrate using knex')
+  .action((name) => {
+     const knexfilePath = path.join(projectRoot, 'knexfile.js');
+     const cmd = `npx knex migrate:rollback`;
+     try {
+       execSync(cmd, { stdio: 'inherit'});
+     } catch (error) {
+       console.log(`Failed to rollback: ${error.message}`); 
+     }
+  });
 program
   .command('migrate:last')
   .description('Runs the latest migration')
