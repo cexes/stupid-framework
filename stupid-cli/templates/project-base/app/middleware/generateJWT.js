@@ -9,7 +9,7 @@ function generateJWT(user) {
     };
 
     const options = {
-        expiresIn: '1d', 
+        expiresIn: '1d',
     };
 
     return jwt.sign(payload, JWT_SECRET, options);
