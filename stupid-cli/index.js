@@ -111,6 +111,40 @@ program
 
 
 program
+  .command('generate:jwt controller <name>')
+  .description('Generate a JWT-protected route')
+  .action((name) => {
+    const authTemplatePath = path.join(__dirname, 'templates/authJWT.js');
+    const generateTemplatePath = path.join(__dirname, 'templates/generateJWT.js');
+
+    const controllerName = name.charAt(0).toUpperCase() + name.slice(1);
+    const replacements = {
+      ControllerName: controllerName,
+      tableName: name.toLowerCase()
+    };
+
+    const authContent = renderTemplate(authTemplatePath, replacements);
+    const authOutputPath = path.join(projectRoot, 'app/middleware', 'authJWT.js');
+    fs.writeFileSync(authOutputPath, authContent);
+
+    // Renderiza generateJWT.js
+    const generateContent = renderTemplate(generateTemplatePath, replacements);
+    const generateOutputPath = path.join(projectRoot, 'app/middleware', 'generateJWT.js');
+    fs.writeFileSync(generateOutputPath, generateContent);
+
+    const routesToAdd = `
+      router.get('/${replacements.tableName}', ${controllerName}.index);
+      router.get('/${replacements.tableName}/:id', ${controllerName}.show);
+      router.post('/${replacements.tableName}', ${controllerName}.store);
+      router.put('/${replacements.tableName}/:id', ${controllerName}.update);
+      router.delete('/${replacements.tableName}/:id', ${controllerName}.destroy);`;
+
+    console.log('✅ JWT middleware and controller created with successfully!');
+  });
+
+
+
+program
   .command('generate:migration <name>')
   .description('Generates a migration using Knex')
   .action((name) => {

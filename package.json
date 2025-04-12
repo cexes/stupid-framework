@@ -7,7 +7,7 @@
   },
   "bin": {
     "create-stupid": "./stupid-cli/create.js",
-     "stupid": "./stupid-cli/index.js"
+    "stupid": "./stupid-cli/index.js"
   },
   "keywords": [],
   "author": "",
