@@ -166,7 +166,7 @@ program
      try {
        execSync(cmd, { stdio: 'inherit'});
      } catch (error) {
-       console.log(`Failed to rollback: ${error.message}`); 
+       console.log(`Failed to rollback: ${error.message}`);
      }
   });
 program

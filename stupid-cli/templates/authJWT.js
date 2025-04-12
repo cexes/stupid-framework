@@ -12,12 +12,12 @@ function authMiddleware(req, res, next) {
         const decoded = jwt.verify(token, JWT_SECRET);
         req.user = decoded; // Aqui você já tem o payload completo
 
-
+   
         if (req.user.role === '' || req.user.role === '') {
             return res.status(403).json({ message: 'Blocked access.' });
         }
 
-        next();
+        next(); 
     } catch (error) {
         console.log('Error verifying token:', error.message, token);
         return res.status(401).json({ message: 'Invalid or expired token' });
